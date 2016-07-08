@@ -7,6 +7,6 @@
 # stop in case of error
 set -eo pipefail
 
-source $(dirname $0)/_common.sh
+source $(dirname $0)/_set-env.sh
 
-docker-compose run --rm web $*
+docker-compose run --service-ports --rm web $*

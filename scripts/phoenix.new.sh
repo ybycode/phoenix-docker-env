@@ -14,6 +14,7 @@ if [[ $# -ne 1 ]]; then
     exit 1
 fi
 
-source $(dirname $0)/_common.sh
+source $(dirname $0)/_set-env.sh
 
-docker-compose run --rm web mix phoenix.new . $1
+docker-compose run --rm web mix phoenix.new . --app $1
+
