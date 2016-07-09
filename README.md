@@ -11,24 +11,31 @@ elixir, phoenix, brunch (and nodejs), postgresql.
 
 ## Configuration
 
-1. Edit one of the existing environment configuration files in `config`,
-   or create a new one having `env-` as prefix, and `.sh` as extension
-   (like `env-prod.sh`).
-2. Create the file `config/env.txt` to indicate the name of the environment
-   to use.
-   For example, if you want to use the environment variables defined in
-   `config/env-prod.sh`, write `prod` in `config/env.txt`.
+1. By default, the existing environments are "dev" and "prod".
+   Write the name of the environment you want to use in `config/env.txt`:
+
+    ```
+    echo dev > config/env.txt
+    ```
+
+2. For each exising environment, edit `config/env-XXX.sh` and
+   `docker-compose-XXX.yml` to your liking.
+
+To create another environment, say, "test":
+
+- create the file `config/env-test.sh`,
+- create the file `docker-compose-test.sh`.
 
 ## Build the images
 
-    $ ./scripts/build.sh
+    $ ./scripts/compose-build.sh
 
 ## Create a new phoenix project
 
 Create a new phoenix project if needed:
 
-    $ ./scripts/run-cmd.sh mix phoenix.new . --app appName
+    $ ./scripts/compose-run-cmd.sh mix phoenix.new . --app appName
 
 ## Run the phoenix server and postgresql
 
-Run `scripts/run.sh` to start the database and the server.
+Run `scripts/compose-up.sh` to start the database and the server.
