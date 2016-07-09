@@ -1,0 +1,9 @@
+version: '2'
+services:
+  web:
+    build: .
+    environment:
+      ELIXIR_SECRET: $ELIXIR_SECRET
+    ports:
+      - "$PORT_HTTP:4080"
+      - "$PORT_HTTPS:4443"

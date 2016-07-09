@@ -7,14 +7,16 @@
 # stop in case of error
 set -eo pipefail
 
-usage="./phoenix.new.sh APPNAME"
+usage="$0 APPNAME"
 if [[ $# -ne 1 ]]; then
-    echo Bad number of arguments.
+    echo Not enough arguments.
     echo Usage: $usage
     exit 1
 fi
 
 source $(dirname $0)/_set-env.sh
 
-docker-compose run --rm web mix phoenix.new . --app $1
+docker-compose -f docker-compose-base.yml      \
+               -f $DOCKER_COMPOSE_FILE         \
+               run --rm web mix phoenix.new . --app $1
 

@@ -9,4 +9,6 @@ set -eo pipefail
 
 source $(dirname $0)/_set-env.sh
 
-docker-compose run --service-ports --rm web $*
+docker-compose -f docker-compose-base.yml      \
+               -f $DOCKER_COMPOSE_FILE         \
+               run --service-ports --rm web $*
