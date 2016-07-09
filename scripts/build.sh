@@ -9,5 +9,7 @@ set -eo pipefail
 
 source $(dirname $0)/_set-env.sh
 
-docker-compose build
+docker-compose -f docker-compose-base.yml                                \
+               -f $DOCKER_COMPOSE_FILE                                   \
+               build
 

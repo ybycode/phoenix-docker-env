@@ -9,8 +9,12 @@ set -eo pipefail
 
 source $(dirname $0)/_set-env.sh
 
-docker-compose run --rm -e MIX_ENV=$MIX_ENV web mix deps.get
-docker-compose run --rm -e MIX_ENV=$MIX_ENV web mix compile
-docker-compose run --rm -e MIX_ENV=$MIX_ENV web npm install
+docker-compose -f docker-compose-base.yml                                \
+               -f $DOCKER_COMPOSE_FILE                                   \
+               run --rm -e MIX_ENV=$MIX_ENV web mix do deps.get, compile
+
+docker-compose -f docker-compose-base.yml                                \
+               -f $DOCKER_COMPOSE_FILE                                   \
+               run --rm -e MIX_ENV=$MIX_ENV web npm install
 
 echo DONE!
