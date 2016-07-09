@@ -18,13 +18,14 @@ elixir, phoenix, brunch (and nodejs), postgresql.
     echo dev > config/env.txt
     ```
 
-2. For each exising environment, edit `config/env-XXX.sh` and
-   `docker-compose-XXX.yml` to your liking.
+2. For each exising environment, edit `config/ENV_NAME/env.sh` and
+   `config/ENV_NAME/docker-compose-override.yml` to your liking.
 
 To create another environment, say, "test":
 
-- create the file `config/env-test.sh`,
-- create the file `docker-compose-test.sh`.
+- create the directory `config/test`,
+- create the file `config/test/env.sh`,
+- create the file `config/test/docker-compose-override.sh`.
 
 ## Build the images
 

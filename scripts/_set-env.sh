@@ -20,10 +20,9 @@ cd $THIS_DIR/..
 ENV_FILENAME=$(readlink -f config/env.txt) # absolute filename because it can
                                            # be printed in errors.
 
-
 if [[ ! -e "$ENV_FILENAME" ]]; then
     echo Error: environment name not configured:
-    echo Please create the file $ENV_FILENAME from the template file ${ENV_FILENAME}.template
+    echo Please write the environment name to use in $ENV_FILENAME.
     echo Exiting
     exit 1
 fi
@@ -31,10 +30,10 @@ fi
 ENV=$(cat $ENV_FILENAME | tr -d '[[:space:]]')
 
 ################################################################################
-# The config/env-${ENV}.sh
+# The config/${ENV}/env.sh
 #
 
-env_file=$(readlink -f config/env-${ENV}.sh)
+env_file=$(readlink -f config/${ENV}/env.sh)
 
 if [[ ! -e "$env_file" ]]; then
     echo Error: the file $env_file doesn\'t exist. Create it or change the value\
@@ -45,10 +44,10 @@ fi
 source $env_file
 
 ################################################################################
-# The docker-compose-${ENV}.yml
+# The config/${ENV}/docker-compose-override.yml
 #
 
-DOCKER_COMPOSE_FILE=docker-compose-${ENV}.yml
+DOCKER_COMPOSE_FILE=$(readlink -f config/${ENV}/docker-compose-override.yml)
 
 if [[ ! -e "$DOCKER_COMPOSE_FILE" ]]; then
     echo Error: the file $DOCKER_COMPOSE_FILE doesn\'t exist.
